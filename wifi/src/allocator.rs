@@ -18,6 +18,7 @@ const MAIN_HEAP_SIZE: usize = 128 * 1024; // 128 KB
 /// # Panics
 ///
 /// Panics if heap allocation fails or insufficient memory is available.
+#[inline(always)]
 pub fn init_heap() {
     esp_alloc::heap_allocator!(#[esp_hal::ram(reclaimed)] size: RECLAIMED_HEAP_SIZE);
     esp_alloc::heap_allocator!(size: MAIN_HEAP_SIZE);

@@ -9,10 +9,7 @@ use embassy_executor::Spawner;
 use esp_hal::peripherals::WIFI;
 use esp_println::println;
 use esp_radio::wifi::WifiController;
-use crate::types::{RADIO_INIT, WIFI_CONTROLLER};
-
-/// Interval between WiFi scans in seconds
-const SCAN_INTERVAL_SECS: u64 = 10;
+use crate::types::{RADIO_INIT, WIFI_CONTROLLER, SCAN_INTERVAL_SECS};
 
 /// Embassy task that continuously scans for WiFi networks.
 ///
@@ -32,6 +29,8 @@ pub async fn wifi_scan_task(wifi_controller: &'static mut WifiController<'static
     wifi_controller
         .set_mode(esp_radio::wifi::WifiMode::Sta)
         .unwrap();
+
+    let interval = SCAN_INTERVAL_SECS as u64;
 
     loop {
         println!("Starting Wi-Fi scan...");
@@ -56,7 +55,7 @@ pub async fn wifi_scan_task(wifi_controller: &'static mut WifiController<'static
             }
         }
         println!("Waiting before next scan...");
-        Timer::after(Duration::from_secs(SCAN_INTERVAL_SECS)).await;
+        Timer::after(Duration::from_secs(interval)).await;
     }
 }
 

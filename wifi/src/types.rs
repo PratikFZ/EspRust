@@ -16,3 +16,6 @@ pub static WIFI_CONTROLLER: StaticCell<WifiController<'static>> = StaticCell::ne
 ///
 /// This static cell stores the radio controller that manages WiFi/BLE hardware.
 pub static RADIO_INIT: StaticCell<esp_radio::Controller<'static>> = StaticCell::new();
+
+/// Interval between WiFi scans in seconds
+pub const SCAN_INTERVAL_SECS: u8 = 10;
