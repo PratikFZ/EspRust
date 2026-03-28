@@ -77,6 +77,7 @@ smoltcp = { version = "0.12.0", default-features = false, features = [
 
 critical-section = "1.2.0"
 static_cell      = "2.1.1"
+lsm6dso = "0.2.1"
 
 [dev-dependencies]
 embedded-test = { version = "0.7.0", features = [
